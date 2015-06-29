@@ -1,28 +1,4 @@
-class BloomFilter
-
-    def initialize(bits = 16)
-        @bits = bits
-        @bitset = Array.new(2 ** @bits, 0)
-    end
-
-    def add(s)
-        hash(s).each { |h| @bitset[h] = 1 }
-    end
-
-    def include?(s)
-        hash(s).each { |h| return false unless @bitset[h] == 1 }
-        true
-    end
-
-private
-
-    def hash(s)
-        h1 = s.hash % @bitset.size
-        h2 = s.sum(@bits)
-        [h1, h2]
-    end
-
-end
+require_relative 'lib/bloom_filter'
 
 # Add lots of random strings
 length = 10
@@ -38,7 +14,7 @@ strings.each { |s| puts "#{s} should be included but isn't" unless b.include? s 
 # Rough check of false positives
 other_strings = []
 100.times do
-    string = rand(36 ** length).to_s(36)
+    string = rand(36 ** (1 + rand(100))).to_s(36)
     next if strings.include? string
     other_strings << string
 end
