@@ -7,31 +7,31 @@ describe RunLength do
 
         context 'with an empty string' do
             let('string') { '' }
-            subject{ get }
+            subject { get }
             it { should eq '' }
         end
 
         context 'with "a"' do
             let('string') { 'a' }
-            subject{ get }
+            subject { get }
             it { should eq '1a' }
         end
 
         context 'with "aa"' do
             let('string') { 'aa' }
-            subject{ get }
+            subject { get }
             it { should eq '2a' }
         end
 
         context 'with "aab"' do
             let('string') { 'aab' }
-            subject{ get }
+            subject { get }
             it { should eq '2a1b' }
         end
 
         context 'with "aaaabcccccccccdddddz"' do
             let('string') { 'aaaabcccccccccdddddz' }
-            subject{ get }
+            subject { get }
             it { should eq '4a1b9c5d1z' }
         end
     end
